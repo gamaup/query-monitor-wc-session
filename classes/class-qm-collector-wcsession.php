@@ -9,12 +9,17 @@ class QM_Collector_WCSession extends QM_Collector {
 	}
 
 	public function process() {
-		global $woocommerce;
-		if ( ! is_null( $woocommerce->session ) ) {
-			$session_data = $woocommerce->session->get_session_data();
-			$this->data = $this->maybe_unserialize_recursively( $session_data );
-		} else {
-			$this->data = array();
+		$this->data = array(
+			'session'	=> array(),
+			'cart'		=> array()
+		);
+		if ( ! is_null( WC()->session ) ) {
+			$session_data = WC()->session->get_session_data();
+			$this->data['session'] = $this->maybe_unserialize_recursively( $session_data );
+		}
+		if ( ! is_null( WC()->cart ) ) {
+			$cart_data = WC()->cart->get_cart();
+			$this->data['cart'] = $this->maybe_unserialize_recursively( $cart_data );
 		}
 	}
 

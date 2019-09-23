@@ -4,7 +4,7 @@
  *
  * Class QM_Output_IncludedFiles
  */
-class QM_Output_WCSession extends QM_Output_Html {
+class QM_Output_WCCart extends QM_Output_Html {
 
 	public function __construct( QM_Collector $collector ) {
 		parent::__construct( $collector );
@@ -18,9 +18,9 @@ class QM_Output_WCSession extends QM_Output_Html {
 	 */
 	public function output() {
 		$data = $this->collector->get_data();
-		echo '<div class="qm qm-non-tabular" id="qm-wc_session" role="group" aria-labelledby="qm-wc_session-caption"><div class="qm-boxed">';
+		echo '<div class="qm qm-non-tabular" id="qm-wc_cart" role="group" aria-labelledby="qm-wc_cart-caption"><div class="qm-boxed">';
 		echo '<pre>';
-		print_r($data['session']);
+		print_r($data['cart']);
 		echo '</pre>';
 		echo '</div></div>';
 	}
@@ -47,16 +47,16 @@ class QM_Output_WCSession extends QM_Output_Html {
 	 * @return array
 	 */
 	public function admin_class( array $class ) {
-		$class[] = 'qm-wc_session';
+		$class[] = 'qm-wc_cart';
 		return $class;
 	}
 
 	public function admin_menu( array $menu ) {
 		$data = $this->collector->get_data();
 		$menu[] = $this->menu( array(
-			'id'    => 'qm-wc_session',
-			'href'  => '#qm-wc_session',
-			'title' => __( 'WC Session', 'query-monitor' )
+			'id'    => 'qm-wc_cart',
+			'href'  => '#qm-wc_cart',
+			'title' => __( 'WC Cart Items', 'query-monitor' )
 		));
 		return $menu;
 	}
